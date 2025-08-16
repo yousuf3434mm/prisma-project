@@ -83,6 +83,21 @@ const AddProduct = () => {
 
                             <div className="w-full">
                                 <input
+                                    type="text"
+                                    {...register("productname", {
+                                        required: "Product name is required",
+                                    })}
+                                    placeholder="Product Name"
+                                    className="border border-purple-300 focus:border-purple-800 focus:ring-2 focus:ring-purple-200 p-2 rounded w-full transition"
+                                />
+                                {errors.productname && (
+                                    <p className="text-red-600 text-sm mt-1">
+                                        {errors.productname.message}
+                                    </p>
+                                )}
+                            </div>
+                            <div className="w-full">
+                                <input
                                     type="number"
                                     {...register("presentstock", {
                                         required: "Present stock is required",
@@ -141,11 +156,11 @@ const AddProduct = () => {
                                 })}
                                 className="w-full border border-purple-300 focus:border-purple-800 focus:ring-2 focus:ring-purple-200 rounded px-3 py-2"
                             >
-                                <option value="">Select Unit</option>
-                                <option value="PCS">PCS</option>
-                                <option value="Kg">Kg</option>
-                                <option value="Feet">Feet</option>
-                                <option value="Number">Number</option>
+                                <option value="" className="bg-purple-800 text-white">Select Unit</option>
+                                <option value="PCS" className="bg-purple-800 text-white">PCS</option>
+                                <option value="Kg" className="bg-purple-800 text-white">Kg</option>
+                                <option value="Feet" className="bg-purple-800 text-white">Feet</option>
+                                <option value="Number" className="bg-purple-800 text-white">Number</option>
                             </select>
                             {errors.unit && (
                                 <p className="text-red-600 text-sm mt-1">{errors.unit.message}</p>
@@ -160,10 +175,12 @@ const AddProduct = () => {
                                 className="w-full border border-purple-300 focus:border-purple-800 focus:ring-2 focus:ring-purple-200 rounded px-3 py-2"
                             >
                                 <option value="">Warranty</option>
-                                <option value="7days">7 Days</option>
-                                <option value="3month">3 Month</option>
-                                <option value="6month">6 Month</option>
-                                <option value="1year">1 Year</option>
+                                <option value="No Warranty" className="bg-purple-800 text-white">No Warranty</option>
+                                <option value="7 days" className="bg-purple-800 text-white">7 Days</option>
+                                <option value="3 month" className="bg-purple-800 text-white">3 Month</option>
+                                <option value="6 month" className="bg-purple-800 text-white">6 Month</option>
+                                <option value="1 year" className="bg-purple-800 text-white">1 Year</option>
+                                <option value="2 year" className="bg-purple-800 text-white">2 Year</option>
                             </select>
                             {errors.warranty && (
                                 <p className="text-red-600 text-sm mt-1">{errors.warranty.message}</p>
@@ -171,18 +188,27 @@ const AddProduct = () => {
                         </div>
 
                         {/* Category */}
-                        <div className="w-full">
+                       <div className="flex gap-4">
+                         <div className="w-full">
                             <select
                                 {...register("category", {
                                     required: "Category is required",
                                 })}
                                 className="w-full border border-purple-300 focus:border-purple-800 focus:ring-2 focus:ring-purple-200 rounded px-3 py-2"
                             >
-                                <option value="">Select Category</option>
-                                <option value="mobile">Mobile</option>
-                                <option value="battery">Battery</option>
-                                <option value="charger">Charger</option>
-                                <option value="headphone">Head Phone</option>
+                                <option value="" className="bg-purple-800 text-white">Select Category</option>
+                                <option value="Mobile" className="bg-purple-800 text-white">Mobile</option>
+                                <option value="Battery" className="bg-purple-800 text-white">Battery</option>
+                                <option value="Charger" className="bg-purple-800 text-white">Charger</option>
+                                <option value="Head Phone" className="bg-purple-800 text-white">Head Phone</option>
+                                <option value="Cable" className="bg-purple-800 text-white">Cable</option>
+                                <option value="Cover" className="bg-purple-800 text-white">Cover</option>
+                                <option value="Remote" className="bg-purple-800 text-white">Remote</option>
+                                <option value="Stand" className="bg-purple-800 text-white">Stand</option>
+                                <option value="Memory & Pendrive" className="bg-purple-800 text-white">Memory & Pendrive</option>
+                                <option value="Backshall" className="bg-purple-800 text-white">Backshall</option>
+                                <option value="Casing" className="bg-purple-800 text-white">Casing</option>
+                                <option value="Logic" className="bg-purple-800 text-white">Logic</option>
                             </select>
                             {errors.category && (
                                 <p className="text-red-600 text-sm mt-1">{errors.category.message}</p>
@@ -197,15 +223,16 @@ const AddProduct = () => {
                                 })}
                                 className="w-full border border-purple-300 focus:border-purple-800 focus:ring-2 focus:ring-purple-200 rounded px-3 py-2"
                             >
-                                <option value="">Select Sub-category</option>
-                                <option value="charger">Charger</option>
-                                <option value="cable">Cable</option>
-                                <option value="cover">Cover</option>
+                                <option value="" className="bg-purple-800 text-white">Select Sub-category</option>
+                                <option value="Charger" className="bg-purple-800 text-white">Charger</option>
+                                <option value="Cable" className="bg-purple-800 text-white">Cable</option>
+                                <option value="Cover" className="bg-purple-800 text-white">Cover</option>
                             </select>
                             {errors.subcategory && (
                                 <p className="text-red-600 text-sm mt-1">{errors.subcategory.message}</p>
                             )}
                         </div>
+                       </div>
 
                         {/* Description */}
                         <div className="w-full">

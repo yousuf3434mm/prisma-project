@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const AllProducts = ({ product }) => {
@@ -14,14 +15,16 @@ const AllProducts = ({ product }) => {
       </div>
 
       {/* Header */}
-      <div className="bg-purple-800 text-white text-center py-4">
+      <div className="bg-purple-800 text-white text-center py-2">
+        <Link href={`/products/${id}`}>
         <h2 className="text-lg sm:text-xl font-bold truncate">
           {product.productname}
         </h2>
+        </Link>
       </div>
 
       {/* Product Details */}
-      <div className="p-5 sm:p-6 space-y-4 text-sm sm:text-base">
+      <div className="p-5 sm:p-6 space-y-2 text-sm sm:text-base">
         <div className="flex justify-between items-center border-b pb-2">
           <span className="font-semibold text-gray-600">Present Stock:</span>
           <span className="text-gray-800">{product.presentstock}</span>

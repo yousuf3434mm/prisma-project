@@ -6,10 +6,10 @@ export async function POST(req: NextRequest) {
   try {
     const data = await req.json();
 
-    const product = await prisma.product.create({
+    const product = await prisma.Product.create({
       data: {
         productname: data.productname,
-        presentstock: parseInt(data.presentstock, 10),
+        presentstock: parseInt(data.presentstock),
         purchaseprice: parseFloat(data.purchaseprice),
         sellingprice: parseFloat(data.sellingprice),
         unit: data.unit,
