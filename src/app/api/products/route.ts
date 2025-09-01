@@ -36,6 +36,7 @@ export async function POST(req: NextRequest) {
         description: formData.get("description") as string,
         warranty: formData.get("warranty") as string,
         image: imageUrl,
+        iscopyormarketoriginalororignal: formData.get("iscopyormarketoriginalororignal") as string,
       },
     });
 
