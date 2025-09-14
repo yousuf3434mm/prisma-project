@@ -1,6 +1,6 @@
 
 import { PrismaClient } from "@prisma/client";
-import AllNumbers from './../../../components/AllNumber';
+import AllNumbers from '../../../components/Products/AllNumber';
 
 const prisma = new PrismaClient();
 

@@ -1,4 +1,4 @@
-import AllProducts from "@/components/AllProducts";
+import AllProducts from "@/components/Products/AllProducts";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -30,3 +30,6 @@ const Page = async () => {
 };
 
 export default Page;
+
+
+
