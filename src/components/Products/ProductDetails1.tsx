@@ -1,14 +1,53 @@
 "use client";
 
 import { Rating } from "@mui/material";
-import React from "react";
+import React, { useState, useCallback } from "react";
 import Horizontal from "../../../utils/horizontal";
+import SetColor from "./SetColor";
+import SetQuantity from "./SetQuantity";
 
 interface ProductDetails1Props {
   product: any;
 }
 
+export type CartProductType = {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  brand: string;
+  selectedImg: SelectedImgType;
+  quantity: number;
+  price: number;
+};
+
+export type SelectedImgType = {
+  color: string;
+  colorCode: string;
+  image: string;
+};
+
 const ProductDetails1: React.FC<ProductDetails1Props> = ({ product }) => {
+ 
+  const [cartProduct, setCartProduct] = useState<CartProductType>({
+    id: product.id,
+    name: product.name,
+    description: product.description,
+    category: product.category,
+    brand: product.brand,
+    selectedImg: product.images?.[0] || { color: "", colorCode: "", image: "" },
+    quantity: 1,
+    price: product.price,
+  });
+
+  console.log(cartProduct);
+  const handleColorSelect = useCallback(
+    (value: SelectedImgType) => {
+      setCartProduct((prev) => ({ ...prev, selectedImg: value }));
+    },
+    [cartProduct]
+  );
+
   const productRating =
     product.reviews.length === 0
       ? 0
@@ -17,6 +56,22 @@ const ProductDetails1: React.FC<ProductDetails1Props> = ({ product }) => {
           0
         ) / product.reviews.length;
 
+const handleQuantityIncrease = useCallback(() => {
+  setCartProduct((prev) => {
+    return { ...prev, quantity: prev.quantity + 1 };
+  });
+}, []);
+
+const handleQuantityDecrease = useCallback(() => {
+  setCartProduct((prev) => {
+    if (prev.quantity > 1) {
+      return { ...prev, quantity: prev.quantity - 1 };
+    }
+    return prev;
+  });
+}, []);
+
+
   return (
     <div className="max-w-7xl mx-auto p-6 mt-6 bg-white rounded-lg shadow-md">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -24,7 +79,7 @@ const ProductDetails1: React.FC<ProductDetails1Props> = ({ product }) => {
         <div className="w-full h-[400px] bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
           {/* Replace this with actual product image */}
           <img
-            src={product.image || "/placeholder.jpg"}
+            src={cartProduct.selectedImg.image || "/placeholder.jpg"}
             alt={product.name}
             className="object-contain max-h-full"
           />
@@ -70,20 +125,25 @@ const ProductDetails1: React.FC<ProductDetails1Props> = ({ product }) => {
               </div>
               <div
                 className={`text-base font-semibold ${
-                  product.stock > 0 ? "text-green-600" : "text-red-600"
+                  product.inStock ? "text-green-600" : "text-red-600"
                 }`}
               >
-                {product.stock > 0 ? `In Stock: ${product.stock}` : "Out of Stock"}
+                {product.inStock ? "In Stock" : "Out of Stock"}
               </div>
+            </div>
+            <div>
+              <SetColor
+                cartProduct={cartProduct}
+                images={product.images}
+                handleColorSelect={handleColorSelect}
+              />
+            </div>
+            <div className="mt-2">
+             <SetQuantity cartProduct={cartProduct} handleQuantityIncrease={handleQuantityIncrease} handleQuantityDecrease={handleQuantityDecrease}/>
             </div>
           </div>
 
-          {/* Optional Button or Action */}
-          <div className="mt-6">
-            <button className="px-6 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition">
-              Add to Cart
-            </button>
-          </div>
+         
         </div>
       </div>
     </div>
